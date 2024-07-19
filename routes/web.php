@@ -8,7 +8,11 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    return view('jobs', ['jobs' => Job::all()]);
+    // $jobs = Job::with('employer')->paginate(4); // default pagination
+    // $jobs = Job::with('employer')->simplePaginate(4); // more performant than the default pagination
+    $jobs = Job::with('employer')->cursorPaginate(4); // ideal for infinite scrolling or large datasets
+
+    return view('jobs', ['jobs' => $jobs]);
 });
 
 Route::get('/jobs/{id}', function ($id) {

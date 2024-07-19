@@ -2,48 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Job
+class Job extends Model
 {
-    public static function all(): array
+    use HasFactory;
+
+    protected $table = 'job_listings'; // Avoid naming the class "JobListing"
+
+    protected $fillable = ['title', 'salary']; // Define the fields that can be mass assigned (from Tinker or factories)
+
+    public function employer()
     {
-        return [
-            [
-                'id' => 1,
-                'title' => 'PHP Developer',
-                'salary' => 120000,
-            ],
-            [
-                'id' => 2,
-                'title' => 'Python Developer',
-                'salary' => 130000,
-            ],
-            [
-                'id' => 3,
-                'title' => 'Java Developer',
-                'salary' => 110000,
-            ],
-            [
-                'id' => 4,
-                'title' => 'Ruby Developer',
-                'salary' => 100000,
-            ],
-            [
-                'id' => 5,
-                'title' => 'C# Developer',
-                'salary' => 115000,
-            ],
-        ];
+        return $this->belongsTo(Employer::class);
     }
 
-    public static function find(int $id): array
+    public function tags()
     {
-        $job = Arr::first(static::all(), fn ($job) => $job['id'] == $id);
-        if (! $job) {
-            abort(404);
-        }
-
-        return $job;
+        return $this->belongsToMany(Tag::class, foreignPivotKey: 'job_listing_id');
     }
 }
