@@ -25,4 +25,7 @@ php artisan vendor:publish
 
 # listing routes
 php artisan route:list --except-vendor
+
+#policy
+php artisan make:policy
 ```
