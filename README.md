@@ -1,5 +1,8 @@
 # 30 days to learn Laravel
 
+## Run with Herd
+http://laravel-course.test
+
 ## Usefull commands used in the course
 ```
 # tinker
@@ -19,4 +22,7 @@ php artisan migrate:fresh --seed
 
 # update vendor library for pagination
 php artisan vendor:publish
+
+# listing routes
+php artisan route:list --except-vendor
 ```

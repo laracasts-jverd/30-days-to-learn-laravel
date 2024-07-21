@@ -11,7 +11,7 @@ class Job extends Model
 
     protected $table = 'job_listings'; // Avoid naming the class "JobListing"
 
-    protected $fillable = ['title', 'salary']; // Define the fields that can be mass assigned (from Tinker or factories)
+    protected $fillable = ['title', 'salary', 'employer_id']; // Define the fields that can be mass assigned (from Tinker or factories)
 
     public function employer()
     {
